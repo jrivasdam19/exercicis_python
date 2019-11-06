@@ -1,4 +1,4 @@
-#JOSE MIGUEL RIVAS MENDEZ - DAM - PROGRAMACIÓN
+#JOSE MIGUEL RIVAS MENDEZ - DAM - PROGRAMACIÓNes
 #P2 E1
 base=float(input("Introduce la base del triángulo"))
 altura=float(input("Introduce la altura del triángulo"))

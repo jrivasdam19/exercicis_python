@@ -4,7 +4,7 @@ import random
 # CREAR MAZO DE CARTAS
 # ===================================
 
-def crear_cartas():
+def crear_cartas(): # Creamos las cartas mediante listas
     global mazo
     global lista_num
     for i in range(2):
@@ -25,14 +25,14 @@ def crear_cartas():
     for i in range(4):
         mazo.append(["+4", "comodín"])
         mazo.append(["cambia color", "comodín"])
-    for i in range(10):
+    for i in range(10): # Añadimos una lista adicional para cuando el programa elija la primera carta numérica en el tablero
         lista_num.append(str(i))
 
 # ================================================
 # ELEGIR CARTA
 # ==============================================
 
-def elegir_carta():
+def elegir_carta(): # Recorremos la lista de cartas del usuario
     global mano_n
     global carta_actual
     global jugador_actual
@@ -51,7 +51,7 @@ def elegir_carta():
 # ANALIZAMOS LA JUGADA Y LAS CARTAS ACTUALES Y SIGUIENTES
 # ==============================================================
 
-def analisis():
+def analisis(): # Comprobará que la carta que elija el usuario sea válida
     global carta_siguiente
     global carta_actual
     global acumulado
@@ -59,7 +59,7 @@ def analisis():
     global lista_num
     global mano_n
     global jugando
-    opcion = elegir_carta()
+    opcion = elegir_carta() # Asignamos a opcion el valor dado en la función elegir_carta
     if opcion == 0:
         coger_carta()
     else:
@@ -77,7 +77,7 @@ def analisis():
             carta_pierde_turno()
         elif carta_siguiente[1] == "comodín":
             carta_comodin()
-    if len(mano_n) == 0:
+    if len(mano_n) == 0: # Una vez el jugador tire su carta, sea analizada y no tenga cartas, el programa termina.
         print("========================================================")
         print("========Enhorabuena jugador %d! Eres el ganador!========"%(jugador_actual+1))
         print("========================================================")
@@ -87,7 +87,7 @@ def analisis():
 # CONCATENAR CARTAS
 # ===========================================
 
-def concatenar_cartas():
+def concatenar_cartas(): # Este procedimiento sumará los '+2' y '+4' hasta el punto que el jugador no tenga un +2 o +4 y se lleve la suma de todas ellas
     global acumulado
     global carta_actual
     global carta_siguiente
@@ -133,8 +133,8 @@ def concatenar_cartas():
 # SI LA CARTA ACTUAL ES UN COMODÍN
 # ================================================
 
-def carta_actual_comodin():
-    global carta_siguiente
+def carta_actual_comodin(): # Posteriormente de que el jugador haya elegido el color de su comodin,
+    global carta_siguiente  # el siguiente jugador solo se le permite usar cartas del mismo color o comodin en el siguiente turno
     global color_actual
     global carta_elegida
     global mano_n
@@ -164,7 +164,7 @@ def carta_actual_comodin():
 # SI LA CARTA ES NUMÉRICA.
 # ======================================
 
-def carta_numerica():
+def carta_numerica(): # Comprueba que la carta que saca el jugador sea o del mismo color o del mismo numero
     global carta_siguiente
     global color_actual
     global carta_actual
@@ -188,7 +188,7 @@ def carta_numerica():
 # SI LA CARTA ES UN +2
 # =====================================
 
-def carta_mas_dos():
+def carta_mas_dos(): # Acumula 2 cartas para el siguiente jugador
     global carta_actual
     global carta_siguiente
     global acumulado
@@ -219,7 +219,7 @@ def carta_mas_dos():
 # SI LA CARTA ES UN PIERDE TURNO
 # ======================================
 
-def carta_pierde_turno():
+def carta_pierde_turno(): # El siguiente jugador pierde la accion de su turno
     global carta_actual
     global carta_siguiente
     global acumulado
@@ -248,8 +248,8 @@ def carta_pierde_turno():
 # SI LA CARTA ES UN COMODÍN
 # ==================================
 
-def carta_comodin():
-    global carta_actual
+def carta_comodin():    # Mezcla entre el comodin y el '+2', en este caso es un '+4'
+    global carta_actual # y luego determina el color que se jugara en el proximo turno
     global carta_siguiente
     global acumulado
     global color_actual
@@ -273,7 +273,7 @@ def carta_comodin():
 # CAMBIAR COLOR
 # ===================================
 
-def cambia_color():
+def cambia_color(): # Cambia el color a la opcion que desee el jugador
     global colores
     print("Elije un color.")
     for i in range(len(colores)):
@@ -287,7 +287,7 @@ def cambia_color():
 # COGER CARTA
 # =================================
 
-def coger_carta():
+def coger_carta(): # Recogemos una carta o en caso de acumulación de cartas '+2' e '+4' se le aplicara al jugador
     global acumulado
     global mazo
     global mano_n
@@ -306,7 +306,7 @@ def coger_carta():
 # PRIMERA CARTA ALEATORIA NUMÉRICA
 # ====================================
 
-def primera_carta():
+def primera_carta(): # El programa lanza la primera carta, siendo esta numérica y nunca una especial
     global mazo
     global carta_actual
     carta = random.randint(0,len(mazo)-1)
@@ -319,7 +319,7 @@ def primera_carta():
 # REPARTIR 7 CARTAS A CADA JUGADOR
 # =============================================
 
-def repartir_cartas():
+def repartir_cartas(): # Repartimos 7 cartas a cada jugador
     global mazo
     global jugadores
     for i in range(len(jugadores)):
@@ -331,8 +331,8 @@ def repartir_cartas():
 # =====================================
 # JUGADOR NO DICE UNO
 # =====================================
-def uno():
-    global mano_n
+def uno(): 	  # Al tener 2 cartas en su mazo el jugador tendrá que contestar cual es la palabra mágica ('uno'),
+    global mano_n # si no introduce bien la palabra mágica se le sumará dos cartas adicionales
     global mazo
     global jugadores
     if len(mano_n)==2:
@@ -347,7 +347,7 @@ def uno():
 # ASIGNACIÓN DE TURNOS
 # ===================================
 
-def asignar_turno():
+def asignar_turno(): # Decide quien jugará el siguiente turno
     global turno
     global jugadores
     global pierde_turno
@@ -368,7 +368,7 @@ def asignar_turno():
 # CREAR JUGADORES
 # ===================================
 
-def crear_jugadores():
+def crear_jugadores(): # Se crea una lista con los jugadores que jugarán en la partida y el orden
     global jugadores
     opcion = elegir_jugadores()
     for i in range(opcion):
@@ -379,7 +379,7 @@ def crear_jugadores():
 # NUMERO DE JUGADORES
 # ===================================
 
-def elegir_jugadores():
+def elegir_jugadores(): # Elegimos cuantos jugadores jugamos
     num_jugadores = int(input("¿Cuantos jugadores sois?(2~8)\n"))
     while (num_jugadores<2) or (num_jugadores>8):
         num_jugadores = int(input("Por favor ingresa un numero de jugadores entre 2 y 8\n"))
